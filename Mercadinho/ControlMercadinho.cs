@@ -10,11 +10,13 @@ namespace Mercadinho
     {
         DAO conexao;
         DAOFuncionario conexaoFuncionario;
+        DAOEstoque conexaoEstoque;
         public int opcao;
         public ControlMercadinho()
         {
             conexao = new DAO();
-            conexaoFuncionario =  new DAOFuncionario(); 
+            conexaoFuncionario =  new DAOFuncionario();
+            conexaoEstoque = new DAOEstoque();
         } // FIM DO CONSTRUTOR \\
 
         public void Menu()
@@ -22,14 +24,19 @@ namespace Mercadinho
             Console.WriteLine("Escolha  uma das opções abaixo: \n\n" + 
                               "1. Cadastrar Cliente\n" +
                               "2. Cadastrar Funcionário\n" +
-                              "3. Atualizar Cliente\n" +
-                              "4. Atualizar Funcionário\n" +
-                              "5. Consultar Tudo Cliente\n" +
-                              "6. Consultar Cliente por CPF\n" +
-                              "7. Consultar Tudo Funcionário\n" +
-                              "8. Consultar Funcionário por Código\n" +
-                              "9. Excluir Cliente\n" + 
-                              "10.Excluir Funcionário\n" + 
+                              "3. Cadastrar Produto\n" +
+                              "4. Atualizar Cliente\n" +
+                              "5. Atualizar Funcionário\n" +
+                              "6. Atualizar Produto\n" +
+                              "7. Consultar Tudo Cliente\n" +
+                              "8. Consultar Cliente por CPF\n" +
+                              "9. Consultar Tudo Funcionário\n" +
+                              "10. Consultar Funcionário por Código\n" +
+                              "11. Consultar Todos os Produtos\n" +
+                              "12.Consultar Produto por Código" +
+                              "13. Excluir Cliente\n" + 
+                              "14.Excluir Funcionário\n" + 
+                              "15. Excluir Produto\n" +
                               "0. Sair");
             opcao = Convert.ToInt32(Console.ReadLine());
         } // FIM DO MENU \\
@@ -72,7 +79,17 @@ namespace Mercadinho
                     Console.WriteLine(conexao.AtualizarCliente(cpf, campo, novoDado));
                     break;
 
-                case 4: 
+                case 4:
+                    Console.WriteLine("Informe o nome do Produto: ");
+                    string nomeProduto = Console.ReadLine();
+                    Console.WriteLine("Informe a quantidade em estoque do Produto: ");
+                    int quantidade = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("Informe o valor Unitário do Produto: ");
+                    double valorUni = Convert.ToDouble(Console.ReadLine());
+                    conexaoEstoque.CadastrarProduto(nomeProduto, quantidade, valorUni);
+                    break;
+
+                case 5: 
                     Console.WriteLine("Informr o campo do funcionario que deseja atualizar");
                     string field = Console.ReadLine();
                     Console.WriteLine("Informe o dado novo para esse campo: ");
@@ -82,36 +99,62 @@ namespace Mercadinho
                     Console.WriteLine(conexaoFuncionario.AtualizarFuncionario(codigo, field, newData));
                     break;
 
-                case 5:
+                case 6:
+                    Console.WriteLine("Informar o campo do Produto que deseja atualizar");
+                     campo = Console.ReadLine();
+                    Console.WriteLine("Informe o dado novo para esse campo: ");
+                     novoDado = Console.ReadLine();
+                    Console.WriteLine("Insira o Codigo do Produto que deseja Atualizar ");
+                    int codigoProduto = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine(conexaoEstoque.AtualizarProduto(codigoProduto, campo, novoDado));
+                    break;
+
+                case 7:
                     Console.WriteLine(conexao.ConsultarTudoCliente());
                     break;
 
-                case 6:
+                case 8:
                     Console.WriteLine("Informe o CPF do cliente que deseja consultar.");
                     cpf = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine(conexao.ConsultarTudoCliente(cpf));
                     break;
 
-                case 7:
+                case 9:
                     Console.WriteLine(conexaoFuncionario.ConsultarTudoFuncionario());
                     break;
 
-                case 8:
+                case 10:
                     Console.WriteLine("Informe o Código do Funcionário que deseja consultar.");
                     codigo = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine(conexaoFuncionario.ConsultarTudoFuncionario(codigo));
                     break;
 
-                case 9:
-                    Console.WriteLine("Informe o CPF que deseja apagar");
+                case 11:
+                    Console.WriteLine(conexaoEstoque.ConsultarProduto());
+                    break;
+
+                case 12:
+                    Console.WriteLine("Informe o Código do produto que deseja consultar.");
+                    codigoProduto = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine(conexao.ConsultarTudoCliente(codigoProduto));
+                    break;
+
+                case 13:
+                    Console.WriteLine("Informe o CPF do Cliente que deseja apagar");
                     cpf = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine(conexao.DeletarCliente(cpf));
                     break;
 
-                case 10:
-                    Console.WriteLine("Informe o Código que deseja apagar");
+                case 14:
+                    Console.WriteLine("Informe o Código do Funcionário que deseja apagar");
                     codigo = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine(conexaoFuncionario.DeletarFuncionario(codigo));
+                    break;
+
+                case 15:
+                    Console.WriteLine("Informe o Código do Produto que deseja apagar");
+                    codigoProduto = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine(conexaoEstoque.DeletarProduto(codigoProduto));
                     break;
 
                 case 0:

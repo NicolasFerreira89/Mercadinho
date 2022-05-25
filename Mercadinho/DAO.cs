@@ -145,7 +145,7 @@ namespace Mercadinho
                 string query = "delete from Cliente where cpf = '" + cpf + "'";
                 MySqlCommand sql = new MySqlCommand(query, conexao);
                 string resultado = "" + sql.ExecuteNonQuery();
-                return resultado + "Cliente Excluído!.";
+                return resultado + ".";
             }
             catch (Exception e)
             {
