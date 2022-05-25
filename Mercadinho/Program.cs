@@ -12,6 +12,7 @@ namespace Mercadinho
         {
             ControlMercadinho cont = new ControlMercadinho();
             cont.Executar();
+            Console.ReadLine();
         }
     }// FIM DA CLASSE \\
 } // FIM DO PROJETO \\

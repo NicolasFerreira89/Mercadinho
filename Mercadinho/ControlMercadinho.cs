@@ -9,6 +9,7 @@ namespace Mercadinho
     class ControlMercadinho
     {
         DAO conexao;
+        DAOFuncionario conexaoFuncionario;
         public int opcao;
         public ControlMercadinho()
         {

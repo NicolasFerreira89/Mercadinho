@@ -54,23 +54,6 @@ namespace Mercadinho
             }
         }
 
-        public void InserirFuncionario( string enderecoFun, string funcao, double salario, string nomeFun, string sexo)
-        {
-            try
-            {
-                dadosFuncionario = "('','" + enderecoFun + "','" + funcao + "','" + salario + "','" + nomeFun + "','" + sexo + "')";
-                comando = "Insert into Funcionario(codigo, endereco, funcao, salario, nome, sexo) values" + dadosFuncionario;
-                MySqlCommand sql = new MySqlCommand(comando, conexao);
-                resultado = "" + sql.ExecuteNonQuery();
-                Console.WriteLine("Linhas Afetadas.");
-            }
-            catch(Exception e)
-            {
-                Console.WriteLine("Algo deu Errado!\n\n" + e);
-                Console.ReadLine();
-            }
-        }
-
         public void PreencherVetorCliente()
         {
             string query = "select * from Cliente";
@@ -106,48 +89,6 @@ namespace Mercadinho
             leituraCliente.Close();
         } // FIM DO PREECHER VETOR CLIENTE \\ 
 
-        public void PreencherVetorFuncionario()
-        {
-            string query = "select * from Funcionario";
-
-            codigo = new int[100];
-            nomeFun = new string[100];
-            enderecoFun = new string[100];
-            funcao = new string[100];
-            salario = new double[100];
-            sexo = new string[100];
-
-
-            for (i = 0; i < 100; i++)
-            {
-                codigo[i] = 0;
-                nomeFun[i] = "";
-                enderecoFun[i] = "";
-                funcao[i] = "";
-                salario[i] = 0;
-                sexo[i] = "";
-            }
-            MySqlCommand coletarFuncionario = new MySqlCommand(query, conexao);
-
-            MySqlDataReader leituraFuncionario = coletarFuncionario.ExecuteReader();
-
-            i = 0;
-            contador = 0;
-            while (leituraFuncionario.Read())
-            {
-                codigo[i] = Convert.ToInt32(leituraFuncionario["codigo"]);
-                nomeFun[i] = leituraFuncionario["nome"] + "";
-                enderecoFun[i] = leituraFuncionario["endereco"] + "";
-                funcao[i] = leituraFuncionario["funcao"] + "";
-                salario[i] = Convert.ToDouble(leituraFuncionario["salario"]) + 0;
-                sexo[i] = leituraFuncionario["sexo"] + "";
-                i++;
-                contador++;
-            }
-
-            leituraFuncionario.Close();
-        } // FIM DO PREECHER VETOR FUNCIONARIO \\
-
         public string ConsultarTudoCliente()
         {
             PreencherVetorCliente();
@@ -155,7 +96,7 @@ namespace Mercadinho
 
             for(i =0; i < contador; i++)
             {
-                msg += "CPF" + cpf[i] +
+                msg += "CPF: " + cpf[i] +
                        ",Nome: " + nome[i] +
                        ",Endereço: " + endereco[i] +
                        ",Telefone:" + telefone[i] +
@@ -163,14 +104,14 @@ namespace Mercadinho
             }
             return msg;
         } 
-         public string ConsultarTudoCliente(int cpf)
-        {
+         public string ConsultarTudoCliente(int cod)
+         {
             PreencherVetorCliente();
-            for(int i=0; i  < contador; i++)
+            for(int i=0; i < contador; i++)
             {
-                if(cpf[i] == cpf)
+                if(cpf[i] == cod)
                 {
-                    msg = " CPF:" + cpf[i] +
+                    msg = " CPF: " + cpf[i] +
                           ",Nome: " + nome[i] +
                           ", Endereço: " + endereco[i] +
                           ",Telefone: " + telefone[i] +
@@ -179,9 +120,37 @@ namespace Mercadinho
                     return msg;
                 }
             }
+
             return "CPF Informado não encontrado!";
+         }
+        public string AtualizarCliente(int cpf, string campo, string novoDado)
+        {
+            try
+            {
+                string query = "update Cliente set " + campo + " = '" + novoDado + "'where cpf = '" + cpf + "'";
+                MySqlCommand sql = new MySqlCommand(query, conexao);
+                string resultado = "" + sql.ExecuteNonQuery();
+                return resultado + "Linha Afetada.";
+            }
+            catch (Exception e)
+            {
+                return "Algo deu Errado!\n\n" + e;
+            }
+        } // FIM DO ATUALIZAR CLIENTE \\
 
+        public string DeletarCliente(int cpf)
+        {
+            try
+            {
+                string query = "delete from Cliente where cpf = '" + cpf + "'";
+                MySqlCommand sql = new MySqlCommand(query, conexao);
+                string resultado = "" + sql.ExecuteNonQuery();
+                return resultado + "Linha Afetada.";
+            }
+            catch (Exception e)
+            {
+                return "Algo deu Errado!\n\n" + e;
+            }
         }
-
     } // FIM DA CLASSE \\
 } // FIM DO PROJETO \\
