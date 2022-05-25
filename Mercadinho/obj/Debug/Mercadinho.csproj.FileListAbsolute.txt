@@ -18,3 +18,4 @@ C:\Users\nicolas.sferreira5\source\repos\Mercadinho\Mercadinho\obj\Debug\Mercadi
 C:\Users\nicolas.sferreira5\source\repos\Mercadinho\Mercadinho\obj\Debug\Mercadinho.csproj.CopyComplete
 C:\Users\nicolas.sferreira5\source\repos\Mercadinho\Mercadinho\obj\Debug\Mercadinho.exe
 C:\Users\nicolas.sferreira5\source\repos\Mercadinho\Mercadinho\obj\Debug\Mercadinho.pdb
+C:\Users\nicolas.sferreira5\Source\Repos\Mercadinho\Mercadinho\obj\Debug\Mercadinho.csproj.AssemblyReference.cache

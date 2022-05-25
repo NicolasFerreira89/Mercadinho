@@ -140,11 +140,11 @@ namespace Mercadinho
             return "Código Informado não encontrado!";
         }
 
-        public string AtualizarFuncionario(int codigo, string campo, string novoDado)
+        public string AtualizarFuncionario(int codigo, string field, string newData)
         {
             try
             {
-                string query = "update Funcionario set" + campo + "='" + novoDado + "'where  codigo ='" + codigo + "'";
+                string query = "update Funcionario set " + field + "='" + newData + "' where  codigo ='" + codigo + "'";
                 MySqlCommand sql = new MySqlCommand(query, conexaoFuncionario);
                 string resultado = "" + sql.ExecuteNonQuery();
                 return resultado + "Linha Afetada.";
