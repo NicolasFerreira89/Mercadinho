@@ -57,7 +57,7 @@ namespace Mercadinho
 
         public void PreencherVetorProduto()
         {
-            string query = "select * from Estoque";
+            string query = "select * from Produto";
 
 
             codigoProduto = new int[100];
