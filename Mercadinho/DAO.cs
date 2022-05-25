@@ -45,7 +45,7 @@ namespace Mercadinho
                 comando = "Insert into Cliente(cpf, nome, endereco, telefone) values" + dadosCliente;
                 MySqlCommand sql = new MySqlCommand(comando, conexao);
                 resultado = "" + sql.ExecuteNonQuery();
-                Console.WriteLine("Linhas Afetadas.");
+                Console.WriteLine("Cliente Cadastrado!.");
             }
             catch(Exception e)
             {
@@ -130,7 +130,7 @@ namespace Mercadinho
                 string query = "update Cliente set " + campo + " = '" + novoDado + "'where cpf = '" + cpf + "'";
                 MySqlCommand sql = new MySqlCommand(query, conexao);
                 string resultado = "" + sql.ExecuteNonQuery();
-                return resultado + "Linha Afetada.";
+                return resultado + "Dados do Cliente Atualizados!.";
             }
             catch (Exception e)
             {
@@ -145,7 +145,7 @@ namespace Mercadinho
                 string query = "delete from Cliente where cpf = '" + cpf + "'";
                 MySqlCommand sql = new MySqlCommand(query, conexao);
                 string resultado = "" + sql.ExecuteNonQuery();
-                return resultado + "Linha Afetada.";
+                return resultado + "Cliente Excluído!.";
             }
             catch (Exception e)
             {

@@ -48,7 +48,7 @@ namespace Mercadinho
                 comando = "Insert into Funcionario(codigo, endereco, funcao, salario, nome, sexo) values" + dadosFuncionario;
                 MySqlCommand sql = new MySqlCommand(comando, conexaoFuncionario);
                 resultado = "" + sql.ExecuteNonQuery();
-                Console.WriteLine("Linhas Afetadas.");
+                Console.WriteLine("Funcionário Cadastrado!.");
             }
             catch (Exception g)
             {
@@ -147,7 +147,7 @@ namespace Mercadinho
                 string query = "update Funcionario set " + field + "='" + newData + "' where  codigo ='" + codigo + "'";
                 MySqlCommand sql = new MySqlCommand(query, conexaoFuncionario);
                 string resultado = "" + sql.ExecuteNonQuery();
-                return resultado + "Linha Afetada.";
+                return resultado + "Dados Atualiazados!.";
             }
             catch (Exception g)
             {
@@ -162,7 +162,7 @@ namespace Mercadinho
                 string query = "delete from Funcionario where codigo ='" + codigo + "'";
                 MySqlCommand sql = new MySqlCommand(query, conexaoFuncionario);
                 string resultado = "" + sql.ExecuteNonQuery();
-                return resultado + "Linha Afetada.";
+                return resultado + "Funcionário Excluído!.";
             }
             catch (Exception g)
             {
