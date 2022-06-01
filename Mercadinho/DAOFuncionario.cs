@@ -16,12 +16,15 @@ namespace Mercadinho
         public string resultado;
         public int contador;
         public int f;
+        public string fixo;
+        public double ConsultarVendas;
         public string[] nomeFun;
         public string[] enderecoFun;
         public string[] funcao;
         public string[] sexo;
         public double[] salario;
         public int[] codigo;
+        public int[] horaTrabalhada;
         public string msg;
 
         public DAOFuncionario()
@@ -40,12 +43,12 @@ namespace Mercadinho
             }
         }
 
-        public void InserirFuncionario(string enderecoFun, string funcao, double salario, string nomeFun, string sexo)
+        public void InserirFuncionario(string enderecoFun, string funcao, double salario, int horaTrabalhada, string nomeFun, string sexo)
         {
             try
             {
-                dadosFuncionario = "('','" + enderecoFun + "','" + funcao + "','" + salario + "','" + nomeFun + "','" + sexo + "')";
-                comando = "Insert into Funcionario(codigo, endereco, funcao, salario, nome, sexo) values" + dadosFuncionario;
+                dadosFuncionario = "('','" + enderecoFun + "','" + funcao + "','" + salario + "','" + horaTrabalhada + "','" + nomeFun + "','" + sexo + "')";
+                comando = "Insert into Funcionario(codigo, endereco, funcao, salario, horaTrabalhada, nome, sexo) values" + dadosFuncionario;
                 MySqlCommand sql = new MySqlCommand(comando, conexaoFuncionario);
                 resultado = "" + sql.ExecuteNonQuery();
                 Console.WriteLine("Funcionário Cadastrado!.");
@@ -57,6 +60,25 @@ namespace Mercadinho
             }
         } // FIM DO INSERIR FUNCIONARIO \\
 
+
+        public double ComissaoMensalista(double comissao, double vendas)
+        {
+            if (vendas <= 10000)
+            {
+                ConsultarVendas = (vendas * 5) / 100;
+            }
+            if (vendas > 10000)
+            {
+                ConsultarVendas = ((10000 * 5) / 100) + ((vendas - 10000) * 20) / 100;
+            }
+            return comissao + ConsultarVendas;
+        }
+
+        public int Horistas(int horaTrabalhada)
+        {
+            return horaTrabalhada * 60;
+        }
+
         public void PreencherVetorFuncionario()
         {
             string query = "select * from Funcionario";
@@ -65,9 +87,9 @@ namespace Mercadinho
             nomeFun = new string[100];
             enderecoFun = new string[100];
             funcao = new string[100];
+            horaTrabalhada = new int[100];
             salario = new double[100];
             sexo = new string[100];
-
 
             for (f = 0; f < 100; f++)
             {
@@ -75,6 +97,7 @@ namespace Mercadinho
                 nomeFun[f] = "";
                 enderecoFun[f] = "";
                 funcao[f] = "";
+                horaTrabalhada[100] = 0;
                 salario[f] = 0;
                 sexo[f] = "";
             }
@@ -90,6 +113,7 @@ namespace Mercadinho
                 nomeFun[f] = leituraFuncionario["nome"] + "";
                 enderecoFun[f] = leituraFuncionario["endereco"] + "";
                 funcao[f] = leituraFuncionario["funcao"] + "";
+                horaTrabalhada[f] = Convert.ToInt32(leituraFuncionario["horaTrabalhada"]);
                 salario[f] = Convert.ToDouble(leituraFuncionario["salario"]) + 0;
                 sexo[f] = leituraFuncionario["sexo"] + "";
                 f++;
@@ -111,6 +135,7 @@ namespace Mercadinho
                        ",Endereço do Funcionário: " + enderecoFun[f] +
                        ",Função do Funcionário: " + funcao[f] +
                        ",Salário: " + salario[f] +
+                       ",Horas Trabalhadas:" + horaTrabalhada[f] +
                        ",Sexo: " + sexo[f] +
                        "\n\n";
 
@@ -131,6 +156,7 @@ namespace Mercadinho
                        ",Endereço do Funcionário: " + enderecoFun[f] +
                        ",Função do Funcionário: " + funcao[f] +
                        ",Salário: " + salario[f] +
+                        ",Horas Trabalhadas:" + horaTrabalhada[f] +
                        ",Sexo: " + sexo[f] +
                        "\n\n";
 

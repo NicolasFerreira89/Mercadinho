@@ -37,6 +37,8 @@ namespace Mercadinho
                               "13. Excluir Cliente\n" + 
                               "14.Excluir Funcionário\n" + 
                               "15. Excluir Produto\n" +
+                              "16. Consultar Carga horária Horista\n" +
+                              "17. Consultar comissão do Gerente\n" +
                               "0. Sair");
             opcao = Convert.ToInt32(Console.ReadLine());
         } // FIM DO MENU \\
@@ -64,9 +66,11 @@ namespace Mercadinho
                     string funcao = Console.ReadLine();
                     Console.WriteLine("Informe o salário do Funcionário: ");
                     double salario = Convert.ToDouble(Console.ReadLine());
+                    Console.WriteLine("Informe a quantidade de hora trabalhada ");
+                    int horaTrabalhada = Convert.ToInt32(Console.ReadLine());
                     Console.WriteLine("Informe o sexo do Funcionário: ");
                     string sexo = Console.ReadLine();
-                   conexaoFuncionario.InserirFuncionario(enderecoFun, funcao, salario, nomeFun, sexo);
+                   conexaoFuncionario.InserirFuncionario(enderecoFun, funcao, salario, horaTrabalhada, nomeFun, sexo);
                     break;
 
                 case 3:
@@ -157,15 +161,30 @@ namespace Mercadinho
                     Console.WriteLine(conexaoEstoque.DeletarProduto(codigoProduto));
                     break;
 
+                case 16:
+                    Console.WriteLine("Informe a quantidade de horas trabalhadas ");
+                    horaTrabalhada = Convert.ToInt32(Console.ReadLine());
+                    Console.WriteLine("O Funcionário vai receber: R$ " + conexaoFuncionario.Horistas(horaTrabalhada) + " por horas trabalhadas" );
+                    break;
+
+                case 17:
+                    Console.WriteLine("Informe o vendido no mercado: ");
+                     double vendas = Convert.ToDouble(Console.ReadLine());
+                    Console.WriteLine("Informe o salário do Gerente: ");
+                     double comissao = Convert.ToDouble(Console.ReadLine());
+                    Console.WriteLine("O total de comissao do gerente é de: R$" + conexaoFuncionario.ComissaoMensalista(comissao, vendas));
+                    break;
+
                 case 0:
                     Console.WriteLine("Obrigado!");
                     break;
+
                 default:
                     Console.WriteLine("Código informado Inválido!");
                     break;
 
             }
-        }
+         }
 
     } // FIM DA CLASSE \\
 } // FIM DO PROJETO \\
