@@ -11,6 +11,16 @@ namespace Mercadinho
     class ModelEstoque
     {
         public MySqlConnection notaFiscal;
-        public
-    }
-}
+        public string[] nomeCliente;
+        public long[] CPF;
+        public DateTime[] datadeCompra;
+        public string[] produtos;
+        public int quantidade;
+        public double valorUni;
+        public double valorTotal;
+
+
+
+
+    } // FIM DA CLASSE \\
+}// FIM DO PROJETO \\

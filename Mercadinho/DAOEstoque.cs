@@ -51,6 +51,8 @@ namespace Mercadinho
             catch (Exception p)
             {
                 Console.WriteLine("Algo deu Errado!\n\n" + p);
+
+
                 Console.ReadLine();
             }
         }
@@ -101,9 +103,12 @@ namespace Mercadinho
             for (p =0; p < contador; p++)
             {
                 msg += "Código do Produto: " + codigoProduto[p] +
-                       ",Nome do Produto: " + nomeProduto[p] +
+                       ",Produtos: " + nomeProduto[p] +
+                       ",Nome do Cliente: " + nomeCliente[p] +
+                       ",CPF:" + cpfProduto[p] +
+                       ","
                        ",Quantidade: " + quantidade[p] +
-                       ",Válor Unitário:" + valorUni[p] +
+                       ",Valor Unitário:" + valorUni[p] +
                        "\n\n";
             }
             return msg;
